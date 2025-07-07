@@ -1,12 +1,12 @@
 # Elwataneya - Backend Integration Guide
 
-This document outlines the API-driven architecture of the Elwataneya application and provides a complete guide for integrating a real backend, specifically tailored for a **Node.js with MySQL** environment.
+This document outlines the API-driven architecture of the Elwataneya application and provides a complete guide for integrating a real backend. The repository now includes a `/backend` folder containing a **Node.js with PostgreSQL** implementation.
 
 The frontend has been fully refactored to fetch all data from a central API layer located in `src/api.ts`. All mock data has been removed.
 
 ## Database Schema
 
-A complete SQL script for creating the required database structure is available in `database_schema.sql`. This file serves as the blueprint for your MySQL database.
+A complete SQL script for creating the required database structure is available in `backend/database_schema.sql`. This file serves as the blueprint for your PostgreSQL database.
 
 ## Frontend Environment Variables
 
