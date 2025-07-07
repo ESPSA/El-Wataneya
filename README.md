@@ -1,12 +1,14 @@
 # Elwataneya - Backend Integration Guide
 
-This document outlines the API-driven architecture of the Elwataneya application and provides a complete guide for integrating a real backend, specifically tailored for a **Node.js with MySQL** environment.
+This document outlines the API-driven architecture of the Elwataneya application and provides a complete guide for integrating a real backend. The repository now includes a `/backend` folder containing a **Node.js with PostgreSQL** implementation.
 
 The frontend has been fully refactored to fetch all data from a central API layer located in `src/api.ts`. All mock data has been removed.
 
 ## Database Schema
 
-A complete SQL script for creating the required database structure is available in `database_schema.sql`. This file serves as the blueprint for your MySQL database.
+A complete SQL script for creating the required database structure is available in `backend/database_schema.sql`. This file serves as the blueprint for your PostgreSQL database.
+
+The backend also includes a `/api/contact` endpoint to handle messages from the contact form. Submitted messages are stored in a new `contact_messages` table.
 
 ## Frontend Environment Variables
 
@@ -43,7 +45,7 @@ A separate file, `backend.env.example` (previously `.env.example`), has been inc
 -   **Authentication**: The backend should use JSON Web Tokens (JWT) for authentication. The `/api/auth/login` endpoint should return a short-lived `accessToken` and a long-lived `refreshToken`. The frontend will send the `accessToken` in the `Authorization: Bearer <token>` header for all protected API calls.
 
 -   **Input Sanitization (Preventing XSS)**: To prevent Cross-Site Scripting (XSS) attacks, your backend **must** sanitize all user-provided data before storing it in the database. This is especially important for fields like names, descriptions, and titles.
-    -   A good practice is to use a library like `DOMPurify` on the server-side to strip any malicious HTML and JavaScript from user input.
+    -   A good practice is to use a library like `DOMPurify` on the server-side to strip any malicious HTML and JavaScript from user input. The included backend uses this approach via `src/utils/sanitize.js`.
     -   **Never trust data coming from the client.** Always validate and sanitize on the server.
 
 ---
