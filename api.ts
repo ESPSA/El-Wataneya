@@ -6,7 +6,12 @@
 
 import type { Product, Artisan, Project, Article, User, Offer, BilingualString, AdminPermissions } from './types';
 
-const BASE_URL = process.env.VITE_API_BASE_URL || 'http://localhost:8000/api';
+const BASE_URL = process.env.VITE_API_BASE_URL || 'http://localhost:3001/api';
+
+const getCsrfToken = () => {
+    const match = document.cookie.match(/csrfToken=([^;]+)/);
+    return match ? decodeURIComponent(match[1]) : '';
+};
 
 /**
  * Handles the response from the fetch API.
@@ -36,8 +41,10 @@ const apiFetch = async (endpoint: string, options: RequestInit = {}) => {
     const response = await fetch(`${BASE_URL}${endpoint}`, {
         headers: {
             'Content-Type': 'application/json',
+            'X-CSRF-Token': getCsrfToken(),
             ...options.headers,
         },
+        credentials: 'include',
         ...options,
     });
     return handleResponse(response);

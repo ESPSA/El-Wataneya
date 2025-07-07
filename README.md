@@ -33,6 +33,7 @@ A separate file, `backend.env.example` (previously `.env.example`), has been inc
 1.  Copy `backend.env.example` to a new file named `.env` **in your Node.js backend project folder**.
 2.  Fill in the values in your backend's `.env` file with your actual database credentials, JWT secret, and other sensitive keys.
 3.  Use a library like `dotenv` in your Node.js application to load these variables (`require('dotenv').config();`).
+4.  The backend exposes a `/api/csrf-token` endpoint which returns a token used to protect state-changing requests. The frontend automatically includes this token in an `X-CSRF-Token` header.
 
 ---
 

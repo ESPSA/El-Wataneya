@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
+import csurf from 'csurf';
 import { pool } from './db.js';
 import authRoutes from './routes/auth.js';
 import productRoutes from './routes/products.js';
@@ -15,8 +17,14 @@ import userRoutes from './routes/users.js';
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
+app.use(cookieParser());
+app.use(csurf({ cookie: true }));
+
+app.get('/api/csrf-token', (req, res) => {
+  res.json({ csrfToken: req.csrfToken() });
+});
 
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
