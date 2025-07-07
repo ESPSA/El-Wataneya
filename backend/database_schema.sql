@@ -92,3 +92,12 @@ CREATE TABLE IF NOT EXISTS refresh_tokens (
   token TEXT,
   expires_at TIMESTAMPTZ
 );
+
+CREATE TABLE IF NOT EXISTS contact_messages (
+  id SERIAL PRIMARY KEY,
+  name TEXT,
+  email TEXT,
+  subject TEXT,
+  message TEXT,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
