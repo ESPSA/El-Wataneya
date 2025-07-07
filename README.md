@@ -1,12 +1,12 @@
 # Elwataneya - Backend Integration Guide
 
-This document outlines the API-driven architecture of the Elwataneya application and provides a complete guide for integrating a real backend, specifically tailored for a **Node.js with MySQL** environment.
+This document outlines the API-driven architecture of the Elwataneya application and provides a complete guide for integrating a real backend, now using **Node.js with PostgreSQL**.
 
 The frontend has been fully refactored to fetch all data from a central API layer located in `src/api.ts`. All mock data has been removed.
 
 ## Database Schema
 
-A complete SQL script for creating the required database structure is available in `database_schema.sql`. This file serves as the blueprint for your MySQL database.
+A complete SQL script for creating the required database structure is available in `backend/database_schema.sql`. This file serves as the blueprint for your PostgreSQL database.
 
 ## Frontend Environment Variables
 
@@ -31,6 +31,18 @@ A separate file, `backend.env.example` (previously `.env.example`), has been inc
 1.  Copy `backend.env.example` to a new file named `.env` **in your Node.js backend project folder**.
 2.  Fill in the values in your backend's `.env` file with your actual database credentials, JWT secret, and other sensitive keys.
 3.  Use a library like `dotenv` in your Node.js application to load these variables (`require('dotenv').config();`).
+
+### Backend Setup
+
+The backend source lives in the `backend` folder. To run it locally:
+
+```bash
+cd backend
+npm install
+npm run dev
+```
+
+Create a `.env` file based on `backend.env.example` and ensure PostgreSQL is running with the schema from `database_schema.sql`.
 
 ---
 
